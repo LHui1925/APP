@@ -94,12 +94,10 @@ public class RecordInfoFragment extends Fragment implements Observer {
             Map<String, String> map = new HashMap<>();
 
             String name = jsonObject.getString("name");
-            String time = jsonObject.getString("unlock_time");
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-            long lt = new Long(time);
             //Date date = new Date(lt * 1000);
-            Date date = new Date(lt );
+            Date date = jsonObject.getDate("unlock_time");
             String open_time = sdf.format(date);
 
             map.put("user_name", name);
