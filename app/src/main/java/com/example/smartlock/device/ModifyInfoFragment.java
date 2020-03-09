@@ -1,5 +1,7 @@
 package com.example.smartlock.device;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,7 @@ public class ModifyInfoFragment extends Fragment implements Observer {
     private String mParam2;
     private MyViewModel myViewModel;
     private String modify_phone;
+    SharedPreferences sp;
 
     public ModifyInfoFragment() {
         // Required empty public constructor
@@ -72,13 +75,14 @@ public class ModifyInfoFragment extends Fragment implements Observer {
         }
         myViewModel= ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         myViewModel.getLiveData().observe(this,this);
+        sp = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_modify_info,container,false);
-        modify_phone=HttpUtil.shp.getString("login_phone","");
+        modify_phone=sp.getString("login_phone","");
         //final EditText modify_phone=view.findViewById(R.id.modify_phone);
         final EditText modify_device_num=view.findViewById(R.id.modify_device_num);
         final EditText modify_note=view.findViewById(R.id.modify_note);

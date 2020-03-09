@@ -1,5 +1,7 @@
 package com.example.smartlock.device;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,7 @@ public class BindDeviceFragment extends Fragment implements Observer {
     private static final String ARG_PARAM2 = "param2";
     private MyViewModel myViewModel;
     private String bind_phone_num;
+    SharedPreferences sp;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,6 +74,7 @@ public class BindDeviceFragment extends Fragment implements Observer {
         }
         myViewModel= ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         myViewModel.getLiveData().observe(this, this);
+        sp = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
     }
 
     @Override
@@ -78,7 +82,7 @@ public class BindDeviceFragment extends Fragment implements Observer {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_bind_device,container,false);
 
-        bind_phone_num=HttpUtil.shp.getString("login_phone","");
+        bind_phone_num=sp.getString("login_phone","");
         final EditText edt_note=view.findViewById(R.id.edt_note);
         final EditText edt_identifyingCode=view.findViewById(R.id.edt_identifyingCode);
         //绑定设备

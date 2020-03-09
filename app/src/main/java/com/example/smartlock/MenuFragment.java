@@ -138,7 +138,7 @@ public class MenuFragment extends Fragment implements Observer {
                 map.put("content", object.toJSONString());
 
                 try {
-                    HttpUtil.webRequestWithToken(true, HttpUtil.QueryUserInfo_url, map, myViewModel, "QueryUserInfo");
+                    HttpUtil.webRequestWithToken(true, HttpUtil.QueryUserInfo_url, map, myViewModel, "QueryRecord");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -164,7 +164,7 @@ public class MenuFragment extends Fragment implements Observer {
                map.put("content", object.toJSONString());
 
                try {
-                   HttpUtil.webRequestWithToken(true,HttpUtil.QueryRecord_url,map,myViewModel,"QueryUserInfo");
+                   HttpUtil.webRequestWithToken(true,HttpUtil.QueryRecord_url,map,myViewModel,"QueryRecord");
                } catch (JSONException e) {
                    e.printStackTrace();
                }
