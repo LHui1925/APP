@@ -54,6 +54,7 @@ public class LoginFragment extends Fragment implements Observer {
 
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

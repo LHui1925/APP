@@ -235,4 +235,50 @@
         app:layout_constraintVertical_bias="0.512"
         tools:text="dev0000x" />
 
+    <Button
+        android:id="@+id/unlock"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:background="@android:color/transparent"
+        android:text="远程开门"
+        android:textColor="@color/black"
+        android:textSize="@dimen/menu_size"
+        app:layout_constraintBottom_toTopOf="@+id/guideline53"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintStart_toStartOf="@+id/guideline16"
+        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:src="@drawable/ic_lock_open_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline53"
+        app:layout_constraintEnd_toStartOf="@+id/guideline16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
+    <Button
+        android:id="@+id/TemporaryCode"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:background="@android:color/transparent"
+        android:text="临时密码"
+        android:textColor="@color/black"
+        android:textSize="@dimen/menu_size"
+        app:layout_constraintBottom_toTopOf="@+id/guideline53"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline25"
+        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
+    <ImageView
+        android:id="@+id/imageView36"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:src="@drawable/ic_keyboard_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline53"
+        app:layout_constraintEnd_toStartOf="@+id/guideline25"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

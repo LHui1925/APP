@@ -35,6 +35,13 @@
         app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline56"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,6 +91,7 @@
         android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:text="绑定设备"
+        android:textColor="@color/black"
         android:textSize="@dimen/menu_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
@@ -106,6 +114,7 @@
         android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:text="取消绑定"
+        android:textColor="@color/black"
         android:textSize="@dimen/menu_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
@@ -118,6 +127,7 @@
         android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:text="修改信息"
+        android:textColor="@color/black"
         android:textSize="@dimen/menu_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
@@ -141,10 +151,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_edit_black_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintBottom_toTopOf="@+id/guideline56"
         app:layout_constraintEnd_toStartOf="@+id/guideline15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintTop_toTopOf="@+id/guideline54" />
 
     <Button
         android:id="@+id/query_user_device"
@@ -152,6 +162,7 @@
         android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:text="查询设备"
+        android:textColor="@color/black"
         android:textSize="@dimen/menu_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline54"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
@@ -177,6 +188,43 @@
         android:src="@drawable/ic_widgets_black_24dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline54"
         app:layout_constraintEnd_toStartOf="@+id/guideline15"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline14" />
+        app:layout_constraintTop_toTopOf="@+id/guideline14"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_navigate_next_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline56"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline18"
+        app:layout_constraintTop_toTopOf="@+id/guideline54" />
+
+    <Button
+        android:id="@+id/modifyPassword"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:text="修改密码"
+        android:textColor="@color/black"
+        android:textSize="@dimen/menu_size"
+        app:layout_constraintBottom_toTopOf="@+id/guideline56"
+        app:layout_constraintEnd_toStartOf="@+id/guideline18"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline15"
+        app:layout_constraintTop_toTopOf="@+id/guideline54"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_border_color_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintEnd_toStartOf="@+id/guideline15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline13" />
 </androidx.constraintlayout.widget.ConstraintLayout>

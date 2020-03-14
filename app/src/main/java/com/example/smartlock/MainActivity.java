@@ -9,6 +9,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.service.JPushMessageReceiver;
+
 public class MainActivity extends AppCompatActivity {
     NavController controller;
 
@@ -16,9 +19,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        JPushInterface.setDebugMode(true); //允许被debug，正式版本的时候注掉
+        JPushInterface.init(this);  //初始化
+
         controller= Navigation.findNavController(this,R.id.fragment);
         NavigationUI.setupActionBarWithNavController(this,controller);//出现返回导航键
     }
+
+
 
 
    @Override

@@ -50,6 +50,7 @@ public class DeviceManageFragment extends Fragment implements Observer {
     private MyViewModel myViewModel;
     private String dialog_phone;
     private String query_phone;
+    private String device_number;
 
     public DeviceManageFragment() {
         // Required empty public constructor
@@ -91,10 +92,16 @@ public class DeviceManageFragment extends Fragment implements Observer {
         //final Context context;
         View view=inflater.inflate(R.layout.fragment_device_manage,container,false);
         final View edit_view=inflater.inflate(R.layout.edit,container,false);
+        final View dialog_password=inflater.inflate(R.layout.password,container,false);
 
         dialog_phone=sp.getString("login_phone","");
         query_phone=sp.getString("login_phone","");
-        final EditText dialog_device_num=edit_view.findViewById(R.id.dialog_device_num);
+        device_number=HttpUtil.shp.getString("current_number", "");
+        System.out.println(query_phone+",,,,,,,,,,,,"+device_number);
+
+        final EditText dialog_device_num=edit_view.findViewById(R.id.edt_dialog_number);
+        final EditText edt_dialog_password=dialog_password.findViewById(R.id.edt_dialog_password);
+
         Button cancle_bind=view.findViewById(R.id.cancle_bind);
         //切换到绑定设备界面
         view.findViewById(R.id.bind_device).setOnClickListener(new View.OnClickListener() {
@@ -160,11 +167,11 @@ public class DeviceManageFragment extends Fragment implements Observer {
         view.findViewById(R.id.query_user_device).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());//创建对话框
+                /*AlertDialog.Builder builder=new AlertDialog.Builder(getContext());//创建对话框
                 builder.setTitle("你确定查询手机绑定了多少台设备吗？");
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which) {*/
 
                         JSONObject object=new JSONObject();
                         object.put("phone",query_phone);
@@ -177,6 +184,44 @@ public class DeviceManageFragment extends Fragment implements Observer {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+               // });
+               /* builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                AlertDialog dialog = builder.create();//创建对话框
+                dialog.show();
+
+            }*/
+        });
+        //修改密码
+        view.findViewById(R.id.modifyPassword).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(getView().getContext());//创建对话框
+                builder.setTitle("你确定修改密码吗？").setView(dialog_password);
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((ViewGroup) dialog_password.getParent()).removeView(dialog_password);
+
+                        if(edt_dialog_password.getText().toString().equals("")||edt_dialog_password.getText().toString()==null){
+                            Toast.makeText(getContext(),"请输入新密码",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        JSONObject object=new JSONObject();
+                        object.put("phone",dialog_phone);
+                        object.put("device",device_number);
+                        object.put("control","modifyPassword");
+                        object.put("password", edt_dialog_password.getText().toString());
+
+                        /*Map<String,String> map=new LinkedHashMap<>();
+                        map.put("content", object.toJSONString());*/
+
+                      HttpUtil.wrPOST_text(true,HttpUtil.operation,null,object.toJSONString(),myViewModel,"modifyPassword");
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -191,7 +236,6 @@ public class DeviceManageFragment extends Fragment implements Observer {
             }
         });
 
-
         return view;
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_device_manage, container, false);
@@ -200,7 +244,7 @@ public class DeviceManageFragment extends Fragment implements Observer {
     @Override
     public void onChanged(Object o) {
         Map<String,String> map =(Map<String, String>) o;
-        JSONObject object;;
+        JSONObject object;
         if(map.get("type").equals("UnbindDevice")){
             Toast.makeText(getContext(),map.get("content"),Toast.LENGTH_SHORT).show();
            /* object= JSON.parseObject(map.get("content"));
@@ -215,6 +259,10 @@ public class DeviceManageFragment extends Fragment implements Observer {
             if(object.getString("res").equals("0")){
                 Navigation.findNavController(getView()).navigate(R.id.action_deviceManageFragment_to_deviceInfoFragment);
             }
+        }
+        if(map.get("type").equals("modifyPassword")){
+            //object=JSON.parseObject(map.get("content"));
+            Toast.makeText(getContext(),map.get("content"),Toast.LENGTH_SHORT).show();
         }
 
     }

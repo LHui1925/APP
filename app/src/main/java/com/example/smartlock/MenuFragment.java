@@ -88,19 +88,12 @@ public class MenuFragment extends Fragment implements Observer {
         query_user_phone=HttpUtil.id;
         query_device_number = HttpUtil.shp.getString("current_number", "");
         System.out.println(query_user_phone+",,,,,,,,,,,,"+query_device_number);
-        /*Bundle bundle = getArguments();
-        if(bundle!= null){
-            String s = bundle.getString("number");
-            HttpUtil.shp=getContext().getSharedPreferences("current_device_number", Context.MODE_PRIVATE);
-            HttpUtil.editor=HttpUtil.shp.edit();
-            HttpUtil.editor.putString("current_number_text", s);
-            HttpUtil.editor.apply();
 
-        }     */
         if (HttpUtil.shp.getString("current_device_number", "") != null) {
             current_number = HttpUtil.shp.getString("current_number", "");
             current_device.setText(current_number);
         }
+
 
         //切换到设备管理界面
         view.findViewById(R.id.device_manage).setOnClickListener(new View.OnClickListener() {
@@ -127,6 +120,8 @@ public class MenuFragment extends Fragment implements Observer {
                 controller.navigate(R.id.action_menuFragment_to_userQueryFragment);
             }
         });*/
+
+        //用户查询
         view.findViewById(R.id.query_user).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +148,8 @@ public class MenuFragment extends Fragment implements Observer {
                 controller.navigate(R.id.action_menuFragment_to_recordQueryFragment);
             }
         });*/
+
+        //记录查询
        view.findViewById(R.id.opening_record).setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -162,7 +159,6 @@ public class MenuFragment extends Fragment implements Observer {
 
                Map<String,String> map=new LinkedHashMap<>();
                map.put("content", object.toJSONString());
-
                try {
                    HttpUtil.webRequestWithToken(true,HttpUtil.QueryRecord_url,map,myViewModel,"QueryRecord");
                } catch (JSONException e) {
@@ -170,6 +166,35 @@ public class MenuFragment extends Fragment implements Observer {
                }
            }
        });
+
+        //解锁
+        view.findViewById(R.id.unlock).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject object=new JSONObject();
+                object.put("phone",query_user_phone);
+                object.put("device", query_device_number);
+                object.put("control","unlock");
+                /*Map<String,String> map=new LinkedHashMap<>();
+                map.put("content", object.toJSONString());*/
+                HttpUtil.wrPOST_text(true,HttpUtil.operation,null,object.toJSONString(),myViewModel,"unlock");
+            }
+        });
+
+        //设置临时密码
+        view.findViewById(R.id.TemporaryCode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject object=new JSONObject();
+                object.put("phone",query_user_phone);
+                object.put("device", query_device_number);
+                object.put("control","setTemporaryCode");
+
+                /*Map<String,String> map=new LinkedHashMap<>();
+                map.put("content", object.toJSONString());*/
+                HttpUtil.wrPOST_text(true,HttpUtil.operation,null,object.toJSONString(),myViewModel,"setTemporaryCode");
+            }
+        });
 
 
         return view;
@@ -193,7 +218,6 @@ public class MenuFragment extends Fragment implements Observer {
             }
         }
 
-
         if(map.get("type").equals("QueryRecord")){
             object= JSON.parseObject(map.get("content"));
             Toast.makeText(getContext(), object.getString("msg"),Toast.LENGTH_SHORT).show();
@@ -204,6 +228,14 @@ public class MenuFragment extends Fragment implements Observer {
             }
 
         }
+
+        if(map.get("type").equals("unlock")){
+        Toast.makeText(getContext(),map.get("content"),Toast.LENGTH_SHORT).show();
+    }
+
+        if(map.get("type").equals("setTemporaryCode")){
+        Toast.makeText(getContext(),map.get("content"),Toast.LENGTH_SHORT).show();
+    }
 
     }
 

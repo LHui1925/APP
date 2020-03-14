@@ -8,14 +8,14 @@
     >
 
     <EditText
-        android:id="@+id/edt_dialog_number"
+        android:id="@+id/edt_user_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="请输入设备号"
+        android:hint="请输入用户名"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/guideline27"
         app:layout_constraintEnd_toEndOf="parent"
