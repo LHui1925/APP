@@ -9,6 +9,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.smartlock.JGpush.TagAliasOperatorHelper;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.service.JPushMessageReceiver;
 
@@ -22,6 +27,27 @@ public class MainActivity extends AppCompatActivity {
 
         JPushInterface.setDebugMode(true); //允许被debug，正式版本的时候注掉
         JPushInterface.init(this);  //初始化
+
+        //注册别名
+        TagAliasOperatorHelper.TagAliasBean aliasBean = new TagAliasOperatorHelper.TagAliasBean();
+        aliasBean.action = TagAliasOperatorHelper.ACTION_SET;
+        aliasBean.isAliasAction = true;
+        aliasBean.alias = "15084728436";
+        TagAliasOperatorHelper.sequence++;
+        TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(),TagAliasOperatorHelper.sequence,aliasBean);
+
+
+        //注册标签
+        TagAliasOperatorHelper.TagAliasBean tagBean = new TagAliasOperatorHelper.TagAliasBean();
+        tagBean.action = TagAliasOperatorHelper.ACTION_ADD;
+        tagBean.isAliasAction = false;
+        Set<String> tagSet = new HashSet<>();
+        tagSet.add("dev00001");
+        tagSet.add("dev00002");
+        tagBean.tags = tagSet;
+        TagAliasOperatorHelper.sequence++;
+        TagAliasOperatorHelper.getInstance().handleAction(getApplicationContext(),TagAliasOperatorHelper.sequence,tagBean);
+
 
         controller= Navigation.findNavController(this,R.id.fragment);
         NavigationUI.setupActionBarWithNavController(this,controller);//出现返回导航键

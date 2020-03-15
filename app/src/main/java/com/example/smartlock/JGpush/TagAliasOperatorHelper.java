@@ -172,9 +172,9 @@ public class TagAliasOperatorHelper {
                 Message message = new Message();
                 message.what = DELAY_SEND_ACTION;
                 message.obj = tagAliasBean;
-                delaySendHandler.sendMessageDelayed(message,1000*60);
-                String logs =getRetryStr(tagAliasBean.isAliasAction, tagAliasBean.action,errorCode);
-                ExampleUtil.showToast(logs, context);
+                delaySendHandler.sendMessageDelayed(message,1000*2);
+//                String logs =getRetryStr(tagAliasBean.isAliasAction, tagAliasBean.action,errorCode);
+//                ExampleUtil.showToast(logs, context);
                 return true;
             }
         }
@@ -191,10 +191,10 @@ public class TagAliasOperatorHelper {
             Message message = new Message();
             message.what = DELAY_SET_MOBILE_NUMBER_ACTION;
             message.obj = mobileNumber;
-            delaySendHandler.sendMessageDelayed(message,1000*60);
-            String str = "Failed to set mobile number due to %s. Try again after 60s.";
-            str = String.format(Locale.ENGLISH,str,(errorCode == 6002 ? "timeout" : "server internal error”"));
-            ExampleUtil.showToast(str, context);
+            delaySendHandler.sendMessageDelayed(message,1000*2);
+//            String str = "Failed to set mobile number due to %s. Try again after 60s.";
+//            str = String.format(Locale.ENGLISH,str,(errorCode == 6002 ? "timeout" : "server internal error”"));
+//            ExampleUtil.showToast(str, context);
             return true;
         }
         return false;
@@ -318,10 +318,10 @@ public class TagAliasOperatorHelper {
         }
     }
     public static class TagAliasBean{
-        int action;
-        Set<String> tags;
-        String alias;
-        boolean isAliasAction;
+        public int action;
+        public Set<String> tags;
+        public String alias;
+        public boolean isAliasAction;
 
         @Override
         public String toString() {
