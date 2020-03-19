@@ -251,7 +251,7 @@
     <ImageView
         android:id="@+id/imageView13"
         android:layout_width="0dp"
-        android:layout_height="57dp"
+        android:layout_height="49dp"
         android:src="@drawable/ic_lock_open_black_24dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline53"
         app:layout_constraintEnd_toStartOf="@+id/guideline16"

@@ -94,7 +94,6 @@ public class MenuFragment extends Fragment implements Observer {
             current_device.setText(current_number);
         }
 
-
         //切换到设备管理界面
         view.findViewById(R.id.device_manage).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +138,7 @@ public class MenuFragment extends Fragment implements Observer {
                 }
             }
         });
+
 
         //切换到记录查询界面
        /* view.findViewById(R.id.opening_record).setOnClickListener(new View.OnClickListener() {
@@ -213,6 +213,7 @@ public class MenuFragment extends Fragment implements Observer {
 
             HttpUtil.user_info_extra=object.getJSONArray("extra");
             System.out.println(HttpUtil.user_info_extra+"+++++++++++++++");
+
             if(object.getString("res").equals("0")){
                 Navigation.findNavController(getView()).navigate(R.id.action_menuFragment_to_userInfoFragment);
             }
@@ -231,6 +232,10 @@ public class MenuFragment extends Fragment implements Observer {
 
         if(map.get("type").equals("unlock")){
         Toast.makeText(getContext(),map.get("content"),Toast.LENGTH_SHORT).show();
+        object= JSON.parseObject(map.get("content"));
+        if(object.getString("res").equals("0")){
+
+        }
     }
 
         if(map.get("type").equals("setTemporaryCode")){

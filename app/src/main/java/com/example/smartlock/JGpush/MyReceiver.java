@@ -7,10 +7,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import com.example.smartlock.MainActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,10 +18,13 @@ import cn.jpush.android.api.JPushInterface;
 public class MyReceiver extends BroadcastReceiver {
     private static final String TAG = "JIGUANG-Example";
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
+
         try {
             Bundle bundle = intent.getExtras();
+
             Logger.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
             if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -38,13 +37,16 @@ public class MyReceiver extends BroadcastReceiver {
                 //获取推送的消息 bundle.getString(JPushInterface.EXTRA_MESSAGE)
                 Logger.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
 //                processCustomMessage(context, bundle);
+                String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
                 Toast.makeText(context,bundle.getString(JPushInterface.EXTRA_MESSAGE),Toast.LENGTH_SHORT).show();
 
                 //处理接收到的通知
             } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
                 Logger.d(TAG, "[MyReceiver] 接收到推送下来的通知");
                 int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
+
                 Logger.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
+
 
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
                 Logger.d(TAG, "[MyReceiver] 用户点击打开了通知");
@@ -102,6 +104,8 @@ public class MyReceiver extends BroadcastReceiver {
         return sb.toString();
     }
 
+
+
     //send msg to MainActivity
 //    private void processCustomMessage(Context context, Bundle bundle) {
 //        if (MainActivity.isForeground) {
@@ -123,4 +127,6 @@ public class MyReceiver extends BroadcastReceiver {
 //            LocalBroadcastManager.getInstance(context).sendBroadcast(msgIntent);
 //        }
 //    }
+
+
 }

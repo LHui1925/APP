@@ -102,6 +102,7 @@ public class TagAliasOperatorHelper {
             }
         }
     };
+
     public void handleAction(Context context,int sequence,String mobileNumber){
         put(sequence,mobileNumber);
         Logger.d(TAG,"sequence:"+sequence+",mobileNumber:"+mobileNumber);

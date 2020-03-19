@@ -1,5 +1,6 @@
 package com.example.smartlock.query;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,7 @@ public class RecordInfoFragment extends Fragment implements Observer {
     private String mParam1;
     private String mParam2;
     private MyViewModel myViewModel;
+
 
     public RecordInfoFragment() {
         // Required empty public constructor

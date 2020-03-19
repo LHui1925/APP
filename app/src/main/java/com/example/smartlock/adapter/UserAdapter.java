@@ -45,6 +45,22 @@ public UserAdapter(List<Map<String, String>> user_info_list){
     public int getItemCount() {
         return user_info_list.size();
     }
+    //底部上拉刷新，数据直接在底部显示
+    public void loadMore(List<Map<String, String>> new_list) {
+
+        user_info_list.clear();
+        user_info_list.addAll(new_list);
+        notifyDataSetChanged();
+    }
+
+    //顶部下拉刷新，数据直接从上往下添加数据，显示在顶部
+    public void refreshData(List<Map<String, String>> new_list) {
+
+        user_info_list.clear();
+        user_info_list.addAll(0,new_list);
+        notifyDataSetChanged();
+//            notifyItemInserted(0); 一次只能加一项数据
+    }
 
     //管理界面,static防止内存泄漏
     static class MyViewHolder extends RecyclerView.ViewHolder{//creat constructor
